@@ -7,7 +7,7 @@ print("""
 *************************************
       """)
 
-# player_name = input('Enter your name: ')
+input_name = input('Enter your name: ')
 
 # Declare all the rooms
 
@@ -54,7 +54,7 @@ def move_direction(player, direction):
     else:
         print("Can not move in that direction!")
 # Make a new player object that is currently in the 'outside' room.
-player = Player(room['outside'])
+player = Player(room['outside'], input_name)
 
 # Write a loop that:
 while True:
@@ -63,6 +63,7 @@ while True:
     
     # * Prints the current description (the textwrap module might be useful here).
     print('\n')
+    print(f"{player.player_name} is at ")
     print(player.location)
     print('\n')
     # * Waits for user input and decides what to do.
@@ -84,5 +85,5 @@ while True:
         move_direction(player, command)
     elif command == 'w':
         move_direction(player, command)
-       
+    
     
