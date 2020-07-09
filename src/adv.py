@@ -7,7 +7,7 @@ print("""
 *************************************
       """)
 
-player_name = input('Enter your name: ')
+# player_name = input('Enter your name: ')
 
 # Declare all the rooms
 
@@ -46,95 +46,43 @@ room['treasure'].s_to = room['narrow']
 # Main
 #
 
+def move_direction(player, direction):
+    attribute = direction + '_to'
+    
+    if hasattr(player.location, attribute):
+        player.location = getattr(player.location, attribute)
+    else:
+        print("Can not move in that direction!")
 # Make a new player object that is currently in the 'outside' room.
-player = Player(player_name, current_room=room['outside'])
-   
+player = Player(room['outside'])
 
-
-print(player)
 # Write a loop that:
-#
-# * Prints the current room name
-# * Prints the current description (the textwrap module might be useful here).
-# * Waits for user input and decides what to do.
-#
-# If the user enters a cardinal direction, attempt to move to the room there.
-# Print an error message if the movement isn't allowed.
-#
-# If the user enters "q", quit the game.
 while True:
-    direction = input('You are outside, which direction do you want to go? ')
+    #
+    # * Prints the current room name
     
-    if direction == 'q':
-        break
-    elif direction == 'n':
-        player.current_room = room['outside'].n_to
-        print(player)
-    else:
-        print("Cant go that way!!!")
-        
-        
-    foyer_stop = input('Which direction do you want to go? ')
+    # * Prints the current description (the textwrap module might be useful here).
+    print('\n')
+    print(player.location)
+    print('\n')
+    # * Waits for user input and decides what to do.
+    command = input("\nCommand: ").strip().lower()
+    command = command[0]
     
-    if foyer_stop == 'q':
-        break
-    elif foyer_stop == 'n':
-        player.current_room = room['foyer'].n_to
-        print(player)
-    elif foyer_stop == 's':
-        player.current_room = room['foyer'].s_to
-        print(player)
-    elif foyer_stop == 'e':
-        player.current_room = room['foyer'].e_to
-        print(player)
-    else:
-        print("Cant go that way!!!")
-        
-    overlook_stop = input('Which direction do you want to go? ')
+    # If the user enters "q", quit the game.
+    if command == 'q':
+        break 
+    # If the user enters a cardinal direction, attempt to move to the room there.
+    # Print an error message if the movement isn't allowed.
     
-    if overlook_stop == 'q':
-        break
-    elif overlook_stop == 's':
-        player.current_room = room['foyer']
-        print(player)
-    else:
-        print("Cant go that way!!!")
-        
-    foyer_stop2 = input('Which direction do you want to go? ')
     
-    if foyer_stop2 == 'q':
-        break
-    elif foyer_stop2 == 'n':
-        player.current_room = room['overlook']
-        print(player)
-    elif foyer_stop2 == 's':
-        player.current_room = room['outside']
-        print(player)
-    elif foyer_stop2 == 'e':
-        player.current_room = room['narrow']
-        print(player)
-    else:
-        print("Cant go that way!!!")
-        
-    narrow_stop = input('Which direction do you want to go? ')
+    if command == 'n':
+        move_direction(player, command)
+    elif command == 's':
+        move_direction(player, command)
+    elif command == 'e':
+        move_direction(player, command)
+    elif command == 'w':
+        move_direction(player, command)
+       
     
-    if narrow_stop == 'q':
-        break
-    elif narrow_stop == 'n':
-        player.current_room = room['treasure']
-        print(player)
-    elif narrow_stop == 'w':
-        player.current_room = room['foyer']
-        print(player)
-    else:
-        print("Cant go that way!!!")
-        
-    if player.current_room == room['treasure']:
-        
-        
-        print("""
-***************************************************************
-    CONGRATULATIONS YOU FOUND THE TREASURE ROOM YOU WIN!!!
-***************************************************************
-          """)
-    break
