@@ -7,7 +7,7 @@ print("""
 *************************************
       """)
 
-player_name = input('Enter your name: ')
+
 
 # Declare all the rooms
 
@@ -45,13 +45,13 @@ room['treasure'].s_to = room['narrow']
 #
 # Main
 #
-
+player_name = input('Enter your name: ')
 # Make a new player object that is currently in the 'outside' room.
-player = Player(player_name, current_room=room['outside'])
+player = Player(room['outside'], player_name)
    
 
 
-print(player)
+print(player.player_name)
 # Write a loop that:
 #
 # * Prints the current room name
