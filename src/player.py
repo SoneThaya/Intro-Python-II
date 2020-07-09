@@ -23,8 +23,8 @@ class Player:
     self.inventory.remove(item)
     
   def print_inventory(self):
-    for i, p in enumerate(self.item):
-      print(f"{p}")
+    for i in self.inventory:
+      print(f"{i.item_name}: {i.item_description}")
     
   # def move_direction(player, direction):
   #   attribute = direction + '_to'
